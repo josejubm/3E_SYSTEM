@@ -1,0 +1,17 @@
+{
+    "[php]": {
+        "editor.tabSize": 2
+    },
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "file.insertFinalNewline": true,
+    "editor.fontSize": 18,
+    "window.zoomLevel": 1,
+    "terminal.integrated.fontFamily": "UbuntuMono Nerd Font",
+    "terminal.integrated.fontSize": 18,
+
+}
