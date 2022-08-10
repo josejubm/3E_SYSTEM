@@ -180,12 +180,12 @@ html, body {
 
 .card-custom {
     overflow: hidden;
-    min-height: 450px;
+    min-height: 200px;
     box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
   }
   
   .card-custom-img {
-    height: 200px;
+    height: 150px;
     min-height: 200px;
     background-repeat: no-repeat;
     background-size: cover;
