@@ -27,7 +27,8 @@ function  Logear($user, $password)
                 'STATUS' => "OK",
                 'USER' => $datos['usuario'],
                 'FOTO' => $datos['foto'],
-                'TIPO' => $datos['tipo']
+                'TIPO' => $datos['tipo'],
+                'ID' => $datos['id']
             ];
         }
     }

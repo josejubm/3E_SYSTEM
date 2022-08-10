@@ -16,14 +16,21 @@ switch ($_POST["action"]) {
             } else {
                 $use_name = $_POST['user'];
                 $password = $_POST['password'];
-
                 $resultado = Logear($use_name, $password);
 
                 if ($resultado['STATUS'] == 'OK') {
+                    $idUser = $resultado['ID'];
+                    $fechaLogin = date('Y-m-d h:i:s');
+
+                    $query = "INSERT INTO reporteLog (fechaLogin, idUser) 
+                    VALUES ('$fechaLogin', '$idUser');";
+                    $insertar = $connection->query($query);
+
                     setcookie("LOG", 1, time() + 3600, '/');
                     setcookie("USER", $resultado['USER'], time() + 3600, '/');
                     setcookie("FOTO", $resultado['FOTO'], time() + 3600, '/');
                     setcookie("TIPO", $resultado['TIPO'], time() + 3600, '/');
+                    setcookie("ID", $resultado['ID'], time() + 3600, '/');
 
                     header("Location: Escritorio.php");
                 } else {
@@ -43,8 +50,18 @@ switch ($_POST["action"]) {
                 ];
                 print_r($resultado['STATUS']);
             } elseif ($_POST["salir"] == "salir") {
+                //$fecha = date('Y-m-d h:i:s');
+                //$id = $_POST['id'];
+                
+                //$query1 = "INSERT INTO reporteLog (fechaLogout) 
+                //VALUES ('$fecha') WHERE idUser = '$id';";
+                //$update = $connection->query($query1);
+
                 setcookie("LOG", 1, time() - 3600, '/');
                 setcookie("USER", $resultado['USER'], time() - 3600, '/');
+                setcookie("FOTO", $resultado['FOTO'], time() - 3600, '/');
+                setcookie("TIPO", $resultado['TIPO'], time() - 3600, '/');
+                setcookie("ID", $resultado['ID'], time() - 3600, '/');
 
                 header("Location: Escritorio.php");
             }

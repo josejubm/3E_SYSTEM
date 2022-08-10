@@ -73,6 +73,7 @@
                         <a class="dropdown-item" href="#">Log Out</a>
 
                         <form action="Auth.php" method="POST">
+                            <input type="hidden" name="id" id="id" value="<?php print $_COOKIE["ID"];?>">
                             <input type="hidden" name="action" id="action" value="logout">
                             <input type="hidden" name="salir" id="salir" value="salir">
                             <button type="submit" class="dropdown-item"> salir </button>
