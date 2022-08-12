@@ -9,8 +9,8 @@
         "editor.tabSize": 2
     },
     "file.insertFinalNewline": true,
-    "editor.fontSize": 18,
-    "window.zoomLevel": 1,
+    "editor.fontSize": 17,
+    "window.zoomLevel": 0,
     "terminal.integrated.fontFamily": "UbuntuMono Nerd Font",
     "terminal.integrated.fontSize": 18,
 

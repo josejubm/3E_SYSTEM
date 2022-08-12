@@ -77,6 +77,8 @@ function eliminarFoto ($id = 0 ){
     }
 }
 
+
+
 /**
  * @param array $data
  * @param array $etiquetas
@@ -121,8 +123,8 @@ function generaReporte(
      * Si se tiene en la variable de entorno PATH se puede mandar a llamar de manera directa
      * Si no, se tiene que cargar desde la dirección de donde está el binario
      */
-    //$bin = "wkhtmltopdf";
-    $bin = "/usr/bin/wkhtmltopdf";
+    $bin = "wkhtmltopdf";
+    //$bin = "/usr/local/bin/wkhtmltopdf";
 
     /**
      * Se genera el comando a ejecutar
@@ -133,25 +135,19 @@ function generaReporte(
     /**
      * En caso de windows la dirección del html como del pdf a generar debe estar en comillas dobles (").
      */
-    print $cmd = $bin . ' -s Letter --enable-local-file-access ' . $dir . $name . '.html ' . $dir . $name . '.pdf';
-    // $cmd = "$bin -s Letter --enable-local-file-access \"$dir$name\" \"$dir$namePDF\"";
-    $cmd2 = "wkhtmltopdf -s Letter --enable-local-file-access " . $dir . $name . ".html " . $dir . $name . ".pdf";
+    $cmd = $bin . ' -s Letter --enable-local-file-access --enable-external-links "' . $dir . $name . '.html" "' . $dir . $name . '.pdf"';
+    //$cmd = "$bin -s Letter --enable-local-file-access \"$dir$name\" \"$dir$name\"";
 
     /**
      * Se manda a ejecutar el comando previamente generado a la terminal del SO.
      * El proceso es síncrono, lo que significa que va a esperar el resultado de la ejecución del comando
      */
-
-    print exec($cmd);
-    exit();
-    //$resu = shell_exec('php exec(./script.sh)');
-    //print $resu;
-
+    exec($cmd);
 
     /**
      * Borramos el archivo temporal html para no generar basura
      */
-    //unlink("temporal/$name.html");
+    unlink("temporal/$name.html");
 
     /**
      * Retornamos la dirección de donde fue guardado el PDF resultante

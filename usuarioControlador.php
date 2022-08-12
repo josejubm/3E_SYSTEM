@@ -97,7 +97,7 @@ switch ($_GET["action"]) {
         if ($_POST['checkImage'] == "simon") {
             $foto = $_POST['fotoAnterior'];
             //$resultado = eliminarFoto($id);
-        }else {
+        } else {
             if (isset($_FILES['fotoactu']) && $_FILES['fotoactu']['name'] == "" && $_POST['checkImage'] == "") {
                 $foto = "";
                 $resultado = eliminarFoto($id);
@@ -131,21 +131,41 @@ switch ($_GET["action"]) {
         include('usuario/usuarioVistaLeer.php');
         break;
     case "reporte":
-        //$resultado = $connection->query('SELECT * FROM usuario');
-        //$resultado = $resultado->fetch_all(MYSQLI_ASSOC);
-
         $datos = [];
-        $datos[0] = 'jose manuel';
+
+        $datos[0] = '<th scope="col"> ID </th>';
+        $datos[1] = '<th scope="col"> NOMBRE </th>';
+        $datos[2] = '<th scope="col"> FECHA LOGIN </th>';
 
         $etiqueta = [];
-        $etiqueta = ["<!--##TABLE##-->"];
+        $etiqueta[0] = "<!--TH1-->";
+        $etiqueta[1] = "<!--TH2-->";
+        $etiqueta[2] = "<!--TH3-->";
 
-        $resultadopdf = generaReporte($datos, $etiqueta, 'TemplateReporte.html', 'temporal/', 'reporteUser');
-        print $resultado;
-        //echo '<pre>', htmlspecialchars(shell_exec("/opt/lampp/htdocs/app_3emexico/libraries/./script.sh")), '</pre>', PHP_EOL;
+        $etiqueta[3] = "<!--TD1-->";
+        $etiqueta[4] = "<!--TD2-->";
+        $etiqueta[5] = "<!--TD3-->";
 
-        //exec("opt/lampp/htdocs/app_3emexico/libraries/./script.sh >/dev/null 2>&1 &");
-        //echo "<pre>$rr</pre>";
+        $resultados = $connection->query("SELECT usuario.id, nombreCompleto, usuario, tipo, reportelog.fechaLogin 
+        FROM usuario INNER JOIN reportelog 
+        ON usuario.id = reportelog.idUser;");
+        $resultado = $resultados->fetch_all(MYSQLI_ASSOC);
+
+        $count = 3;
+        foreach ($resultado as $index => $dato) :
+            foreach ($dato[$index] as $inde => $final) :
+
+                print $final[$inde];
+
+            //$datos[$count++] = $resultado[$index];
+            endforeach;
+        endforeach;
+
+        // print_r($datos);
+
+
+        $resultadopdf = generaReporte($datos, $etiqueta, 'plantillaReporte/TemplateReporte.html', 'temporal/', 'reporteUser');
+        //print $resultadopdf;
 
         //header("Content-type: application/pdf");
         //header("Content-Disposition: inline; filename=documento.pdf");
